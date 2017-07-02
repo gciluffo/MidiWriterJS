@@ -1,5 +1,5 @@
 class VexFlow {
-	
+
 	constructor() {
 		// code...
 	}
@@ -13,11 +13,11 @@ class VexFlow {
 		var wait;
 		var pitches = [];
 
-		voice.tickables.forEach(function(tickable) {
+		voice.tickables.forEach(function (tickable) {
 			pitches = [];
 
 			if (tickable.noteType === 'n') {
-				tickable.keys.forEach(function(key) {
+				tickable.keys.forEach(function (key) {
 					// build array of pitches
 					pitches.push(this.convertPitch(key));
 				});
@@ -28,8 +28,8 @@ class VexFlow {
 				return;
 			}
 
-			track.addEvent(new NoteEvent({pitch: pitches, duration: this.convertDuration(tickable), wait: wait}));
-			
+			track.addEvent(new NoteEvent({ pitch: pitches, duration: this.convertDuration(tickable), wait: wait }));
+
 			// reset wait
 			wait = 0;
 		});
@@ -44,7 +44,7 @@ class VexFlow {
 	 */
 	convertPitch(pitch) {
 		return pitch.replace('/', '');
-	} 
+	}
 
 
 	/**
@@ -56,15 +56,15 @@ class VexFlow {
 			case 'w':
 				return '1';
 			case 'h':
-				return note.isDotted() ? 'd2' : '2';
+				return note.getDots() ? 'd2' : '2';
 			case 'q':
-				return note.isDotted() ? 'd4' : '4';
+				return note.getDots() ? 'd4' : '4';
 			case '8':
-				return note.isDotted() ? 'd8' : '8';
+				return note.getDots() ? 'd8' : '8';
 		}
 
 		return note.duration;
 	};
 }
 
-export {VexFlow};
+export { VexFlow };
